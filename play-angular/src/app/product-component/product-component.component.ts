@@ -8,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class ProductComponentComponent implements OnInit {
 
   pageTitle: string = 'Product List View';
+  imageWidth = 50;
+  imageMargin = 2;
+  showImage = false;
+  listFilter = 'cart';
   products: any[] = [
                       {
                         "productId": 1,
@@ -36,4 +40,7 @@ export class ProductComponentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleImage(): void {
+    this.showImage = !this.showImage;
+  }
 }
