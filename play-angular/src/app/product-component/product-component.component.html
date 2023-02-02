@@ -1,24 +1,24 @@
 <div class="card">
   <div class="card-header">
-    Product List View
+    {{pageTitle}}
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-mid-2">Filter by:</div>
-      <div class="col-mid-4">
-        <input type="text">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <input type="text" [(ngModel)]="listFilter">
       </div>
     </div>
     <div class="row">
-      <div class="col-mid-6">Filter by:</div>
+      <div class="col-md-6">Filter by: {{listFilter}}</div>
     </div>
     <div class="table-responsive">
-      <table>
+      <table class="table" *ngIf="products.length">
         <thead>
           <tr>
             <th>
-              <button class="btn btn-primary">
-                Show Image
+              <button class="btn btn-primary" (click)="toggleImage()">
+                {{showImage ? 'Hide':'Show'}} Image
               </button>
             </th>
             <th>Product</th>
@@ -26,11 +26,24 @@
             <th>Available</th>
             <th>Price</th>
             <th>5 star rating</th>
-
-
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <img *ngIf="showImage" [src]="product.imageUrl" [title]="product.productName"
+            [style.width.px]="imageWidth"
+            [style.margin.px]="imageMargin">
+          </td>
+          <td>{{product.productName}}</td>
+          <td>{{product.productCode | lowercase}}</td>
+          <td>{{product.releaseDate}}</td>
+          <td>{{product.price | currency: 'INR' : 'symbol': '1.2-2'}}</td>
+          <td>{{product.starRating}}</td>
+
+
+        </tr>
+        </tbody>
       </table>
     </div>
   </div>
